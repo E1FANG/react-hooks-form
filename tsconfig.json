@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "baseUrl": "./src", // 配置引入文件的绝对路径
     "lib": [
       "dom",
       "dom.iterable",
