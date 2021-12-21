@@ -3,34 +3,38 @@ import { List } from "./List"
 import { SearchPanel } from "./SearchPanel"
 import { useState, useEffect } from "react"
 import { cleanObject, useDebounce } from 'utils/index'
-import * as qs from 'qs'
+import { useHttp } from 'utils/http'
+import { Button } from 'antd'
 
-const apiUrl = process.env.REACT_APP_API_URL
+
 
 export const ProjectListScreen = () => {
   const [param, setParam] = useState({
     name: '',
     personId: ''
   })
+  const client = useHttp()
   const [list, setList] = useState([])
   const [users, setUsers] = useState([])
   const debounceValue = useDebounce(param, 500)
-
   useEffect(() => {
-    fetch(`${apiUrl}/users`).then(async res => {
-      res.ok && setUsers(await res.json())
-    })
+    client('users').then(setUsers)
   }, [])
-
   useEffect(() => {
-    fetch(`${apiUrl}/project?${qs.stringify(cleanObject(debounceValue))}`).then(async res => {
-      res.ok && setList(await res.json())
-    })
+    client('project', { data: cleanObject(debounceValue) }).then(setList)
   }, [debounceValue])
+
+
+  // useEffect(() => {
+  //   fetch(`${apiUrl}/project?${qs.stringify(cleanObject(debounceValue))}`).then(async res => {
+  //     res.ok && setList(await res.json())
+  //   })
+  // }, [debounceValue])
 
 
   return <div>
     <SearchPanel users={users} param={param} setParam={setParam} ></SearchPanel>
     <List users={users} list={list}></List>
+    <Button type="primary">111</Button>
   </div>
 }
