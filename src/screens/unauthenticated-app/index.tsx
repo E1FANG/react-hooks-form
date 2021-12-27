@@ -9,23 +9,23 @@ import logo from 'assets/logo.svg'
 
 
 export const UnauthenticateApp = () => {
-    const [isRegister, setIsRegister] = useState(false)
-    return <Container>
-        <Header />
-        <ShadowCard>
-            <Title>
-                {isRegister ? '请注册' : '请登陆'}
-            </Title>
-            {
-                isRegister ? <RegisterScreen /> : <LoginScreen />
-            }
-            <Divider />
-            <a onClick={() => setIsRegister(!isRegister)} >
-                切换到{isRegister ? '已经有账号了？请登录' : '没有账号？注册新账号'}
-            </a>
+  const [isRegister, setIsRegister] = useState(false)
+  return <Container>
+    <Header />
+    <ShadowCard>
+      <Title>
+        {isRegister ? '请注册' : '请登陆'}
+      </Title>
+      {
+        isRegister ? <RegisterScreen /> : <LoginScreen />
+      }
+      <Divider />
+      <Button type={"link"} onClick={() => setIsRegister(!isRegister)} >
+        切换到{isRegister ? '已经有账号了？请登录' : '没有账号？注册新账号'}
+      </Button>
 
-        </ShadowCard>
-    </Container >
+    </ShadowCard>
+  </Container >
 }
 
 // const Background = styled.div`

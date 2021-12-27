@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { cleanObject, useDebounce } from 'utils/index'
 import { useHttp } from 'utils/http'
 import { Button } from 'antd'
+import styled from '@emotion/styled'
 
 
 
@@ -32,9 +33,12 @@ export const ProjectListScreen = () => {
   // }, [debounceValue])
 
 
-  return <div>
+  return <Container>
+    <h1>项目列表</h1>
     <SearchPanel users={users} param={param} setParam={setParam} ></SearchPanel>
     <List users={users} list={list}></List>
-    <Button type="primary">111</Button>
-  </div>
+  </Container>
 }
+const Container = styled.div`
+padding: 3.2rem;
+`
