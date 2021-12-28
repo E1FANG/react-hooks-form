@@ -1,10 +1,9 @@
 import React from 'react'
-import { List, Project } from "./List"
+import { List } from "./List"
 import { SearchPanel } from "./SearchPanel"
-import { useState, useEffect } from "react"
-import { useDebounce } from 'utils/index'
-import { useHttp } from 'utils/http'
-import { Button, Typography } from 'antd'
+import { useState } from "react"
+import { useDebounce, useDocumentTitle } from 'utils/index'
+import { Typography } from 'antd'
 import styled from '@emotion/styled'
 import { useProject } from 'utils/project'
 import { useUser } from 'utils/user'
@@ -16,22 +15,14 @@ export const ProjectListScreen = () => {
     name: '',
     personId: ''
   })
-  const client = useHttp()
+
+  useDocumentTitle('项目列表', true)
 
   const debounceValue = useDebounce(param, 500)
 
   const { isLoading, error, data: list } = useProject(debounceValue)
 
   const { data: users } = useUser()
-
-
-
-  // useEffect(() => {
-  //   fetch(`${apiUrl}/project?${qs.stringify(cleanObject(debounceValue))}`).then(async res => {
-  //     res.ok && setList(await res.json())
-  //   })
-  // }, [debounceValue])
-
 
   return <Container>
     <h1>项目列表</h1>

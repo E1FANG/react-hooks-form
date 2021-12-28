@@ -33,6 +33,22 @@ export const useDebounce = (value: any, delay?: number) => {
   return debounceValue
 }
 
+export const useDocumentTitle = (title: string, keepUnmount = false) => {
+  const oldTitle = document.title
+
+  useEffect(() => {
+    document.title = title
+  }, [title])
+
+  useEffect(() => {
+    return () => {
+      if (keepUnmount) {
+        document.title = oldTitle
+      }
+    }
+  }, [])
+}
+
 
 // 什么时候会执行useEffect
 // setState会触发什么
