@@ -1,11 +1,4 @@
-interface User {
-    id: string
-    name: string
-    email: string
-    title: string
-    organization: string
-    token: string
-}
+import { User } from "screens/project-list/SearchPanel"
 
 const apiUrl = process.env.REACT_APP_API_URL
 const localStorageKey = '__auth_provider_token__'

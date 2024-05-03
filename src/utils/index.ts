@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export const isFalsy = (value: unknown) => value === 0 ? false : !value
 
@@ -33,8 +33,8 @@ export const useDebounce = (value: any, delay?: number) => {
   return debounceValue
 }
 
-export const useDocumentTitle = (title: string, keepUnmount = false) => {
-  const oldTitle = document.title
+export const useDocumentTitle = (title: string, keepOnUnmount = false) => {
+  const oldTitle = useRef(document.title).current
 
   useEffect(() => {
     document.title = title
@@ -42,13 +42,13 @@ export const useDocumentTitle = (title: string, keepUnmount = false) => {
 
   useEffect(() => {
     return () => {
-      if (keepUnmount) {
+      if (keepOnUnmount) {
         document.title = oldTitle
       }
     }
-  }, [])
+  }, [oldTitle, keepOnUnmount])
 }
 
-
-// 什么时候会执行useEffect
-// setState会触发什么
+export const resetRoute = () => {
+  window.location.href = window.location.origin
+}
