@@ -18,4 +18,4 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {
 			return setSearchParam(o)
 		}
 	] as const
-}  
+}    
